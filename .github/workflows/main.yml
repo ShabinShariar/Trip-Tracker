@@ -1,9 +1,3 @@
-name: Build Flutter APK
-
-on:
-  push:
-    branches: [ main ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,9 +6,10 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+      
+      # এখানে নিশ্চিত করুন যে আপনি আপনার প্রজেক্ট ডিরেক্টরিতে আছেন (যদি প্রয়োজন হয়)
+      # যদি আপনার কোড রুট ফোল্ডারেই থাকে, তবে নিচের লাইনটি দরকার নেই
+      # - run: cd your_project_folder_name 
+
       - run: flutter pub get
       - run: flutter build apk --release
-      - uses: actions/upload-artifact@v4
-        with:
-          name: TripTrackerAPK
-          path: build/app/outputs/flutter-apk/app-release.apk
